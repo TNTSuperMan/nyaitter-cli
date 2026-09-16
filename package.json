@@ -1,0 +1,23 @@
+{
+  "name": "nyaitter-cli",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^19.3.0",
+    "react-devtools-core": "^7.0.1"
+  },
+  "peerDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "ink": "^7.1.1",
+    "nyaitter.js": "^0.1.6",
+    "react": "^19.3.0"
+  },
+  "scripts": {
+    "start": "bun run ./src/index.ts",
+    "build": "bun build ./src/index.ts --production --target=bun --outfile=dist/index.js"
+  }
+}
