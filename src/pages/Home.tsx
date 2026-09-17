@@ -1,13 +1,15 @@
 import { Box, Text } from "ink";
-import { use, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { client, realtime } from "../client";
 import type { User } from "../client/types";
 import { SimpleUser } from "../view/SimpleUser";
 import { Button } from "../view/Button";
+import { NavigatorContext } from "../App";
 
 const me_promise = client.getMe();
 
 export function Home() {
+  const navigate = useContext(NavigatorContext);
   const me = use(me_promise).user as User;
   const [notify_unreads, setNotifyUnreads] = useState(me.notification_unread_count);
 
@@ -22,7 +24,7 @@ export function Home() {
     <Box>
       <Box marginRight={1}>
         <Text bold italic>nyaitter-cli</Text>
-        <Button char="h" onClick={() => { }} />
+        <Button char="h" onClick={() => navigate("Home")} />
       </Box>
 
       <Text>You:</Text>
