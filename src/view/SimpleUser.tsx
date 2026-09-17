@@ -3,7 +3,7 @@ import type { SimpleUser } from "../client/types";
 
 export function SimpleUser({ user }: { user: SimpleUser }) {
   return (
-    <Box marginX={1}>
+    <Box>
       <Text underline>{user.name}</Text>
       <Text italic>{user.nyaitter_id}</Text>
       {
