@@ -1,5 +1,5 @@
-import { Box, Text } from "ink";
-import { createContext, Suspense, use, useEffect, useState } from "react";
+import { createContext, Suspense, useState } from "react";
+import { Spinner } from "@inkjs/ui";
 import { Home } from "./pages/Home";
 
 export const NavigatorContext = createContext<(path: keyof typeof routes) => void>(() => { });
@@ -15,9 +15,7 @@ export function App() {
   return (
     <NavigatorContext value={navigate}>
       <Suspense fallback={
-        <Text>
-          Loading...
-        </Text>
+        <Spinner type="dots14" />
       }>
         <Page />
       </Suspense>
