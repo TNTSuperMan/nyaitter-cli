@@ -4,7 +4,7 @@ import { NavigatorContext } from "../App";
 import { client, realtime } from "../client";
 import type { User } from "../client/types";
 import { Button } from "../view/Button";
-import { SimpleUser } from "../view/SimpleUser";
+import { SimpleUserView } from "../view/SimpleUser";
 
 const me_promise = client.getMe();
 
@@ -20,7 +20,7 @@ export function TopBar() {
     };
   }, []);
   return (
-    <Box>
+    <Box marginBottom={1}>
       <Box marginRight={1}>
         <Text bold italic>nyaitter-cli</Text>
         <Button char="h" onClick={() => navigate("/")} />
@@ -28,7 +28,7 @@ export function TopBar() {
 
       <Text>You:</Text>
       <Box marginX={1}>
-        <SimpleUser user={me} />
+        <SimpleUserView user={me} />
         <Button char="m" onClick={() => navigate(`/user${me.nyaitter_id}`)} />
       </Box>
 

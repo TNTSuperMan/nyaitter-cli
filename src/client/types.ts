@@ -81,3 +81,33 @@ export interface User extends SimpleUser {
   pin: string | null;
   created_at: string;
 }
+
+export interface Post {
+  id: number;
+  useid: number;
+  content: string;
+  view_content: string;
+  tags: string[];
+  mask: boolean;
+  lock: boolean;
+  announcement: boolean;
+  attachments: unknown[];
+  reply_id: number | null;
+  created_at: string;
+  updatedAt: string;
+  user: SimpleUser;
+  author: SimpleUser;
+  reply_control: "everyone" | string;
+  can_reply: boolean;
+  private: boolean;
+  repost_to: number | null;
+  reply_to_post: unknown | null;
+  reposted_post: unknown | null;
+  like_count: number;
+  star_count: number;
+  reply_count: number;
+  repost_count: number;
+  liked_by_me: boolean;
+  starred_by_me: boolean;
+  poll: unknown | null;
+}

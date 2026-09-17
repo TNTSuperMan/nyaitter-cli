@@ -1,7 +1,7 @@
 import { Box, Text } from "ink";
 import type { SimpleUser } from "../client/types";
 
-export function SimpleUser({ user }: { user: SimpleUser }) {
+export function SimpleUserView({ user }: { user: SimpleUser }) {
   return (
     <Box>
       <Text underline>{user.name}</Text>

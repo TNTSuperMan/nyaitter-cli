@@ -8,7 +8,7 @@ export const NavigatorContext = createContext<(path: string) => void>(() => { })
 
 function Page({ path }: { path: string }) {
   if (path === "/") {
-    return <Home />
+    return <Home />;
   }
 
   const user_match = /^\/user#(\d{4})/.exec(path);
