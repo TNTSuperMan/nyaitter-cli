@@ -1,6 +1,6 @@
 # nyaitter-cli
 
-> ![WARNING]
+> [!WARNING]
 > このリポジトリはNyaitter・Scratch財団と連携・関係しない個人が作った非公式のものです。
 
 [Nyaitter](https://github.com/Nyaitter)のCLIクライアントです
