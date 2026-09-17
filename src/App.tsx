@@ -31,7 +31,7 @@ function AppAsync() {
         <Button char="m" onClick={() => { }} />
       </Box>
 
-      <Box paddingRight={1} backgroundColor={notify_unreads === 0 ? "black" : "red"}>
+      <Box paddingRight={1} backgroundColor={notify_unreads === 0 ? undefined : "red"}>
         <Text>🔔{notify_unreads}</Text>
       </Box>
       <Button char="n" onClick={() => { }} />
