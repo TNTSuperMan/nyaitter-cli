@@ -10,16 +10,16 @@ export interface GroupBadge {
 
 export interface Notice {
   id: number;
-  type: "reply" | "like" | string;
+  type: "reply" | "like" | "repost" | "follow";
   from: SimpleUser;
   target: {
-    kind: "post" | string;
+    kind: "post" | "user" | string;
     id: number;
   };
   target_post: {
     id: number;
     content: string;
-  };
+  } | null;
   read: boolean;
   clicked: boolean;
   message: string | null;

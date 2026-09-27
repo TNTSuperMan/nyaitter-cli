@@ -3,12 +3,17 @@ import { Spinner } from "@inkjs/ui";
 import { Home } from "./pages/Home";
 import { TopBar } from "./view/TopBar";
 import { Box, Text } from "ink";
+import { Notification } from "./pages/Notification";
 
 export const NavigatorContext = createContext<(path: string) => void>(() => { });
 
 function Page({ path }: { path: string }) {
   if (path === "/") {
     return <Home />;
+  }
+
+  if (path === "/notification") {
+    return <Notification />;
   }
 
   const user_match = /^\/user#(\d{4})/.exec(path);

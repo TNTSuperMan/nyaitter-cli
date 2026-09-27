@@ -1,24 +1,19 @@
-import { use, useContext, useEffect, useState } from "react";
+import { use, useContext } from "react";
 import { Box, Text } from "ink";
 import { NavigatorContext } from "../App";
-import { client, realtime } from "../client";
+import { client } from "../client";
 import type { User } from "../client/types";
 import { Button } from "../view/Button";
 import { SimpleUserView } from "../view/SimpleUser";
+import { useNotificationUnreads } from "../client/hooks/notificationUnreads";
 
 const me_promise = client.getMe();
 
 export function TopBar() {
   const navigate = useContext(NavigatorContext);
   const me = use(me_promise).user as User;
-  const [notify_unreads, setNotifyUnreads] = useState(me.notification_unread_count);
+  const unreads = useNotificationUnreads(me.notification_unread_count);
 
-  useEffect(() => {
-    realtime.on("notificationUnreadCount", setNotifyUnreads);
-    return () => {
-      realtime.off("notificationUnreadCount", setNotifyUnreads);
-    };
-  }, []);
   return (
     <Box marginBottom={1}>
       <Box marginRight={1}>
@@ -32,10 +27,10 @@ export function TopBar() {
         <Button char="m" onClick={() => navigate(`/user${me.nyaitter_id}`)} />
       </Box>
 
-      <Box paddingRight={1} backgroundColor={notify_unreads === 0 ? undefined : "red"}>
-        <Text>🔔{notify_unreads}</Text>
+      <Box paddingRight={1} backgroundColor={unreads === 0 ? undefined : "red"}>
+        <Text>🔔{unreads}</Text>
       </Box>
-      <Button char="n" onClick={() => { }} />
+      <Button char="n" onClick={() => navigate("/notification")} />
     </Box>
   )
 }
