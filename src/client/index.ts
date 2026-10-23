@@ -24,7 +24,8 @@ if (isNaN(ratelimit_secs)) {
 }
 
 export const client = new NyaitterClient({
-  baseUrl, token,
+  baseUrl,
+  token,
   fetch: createRatelimitedFetch(ratelimit_counts, ratelimit_secs),
   WebSocket: require("ws"),
 });

@@ -17,7 +17,9 @@ export function TopBar() {
   return (
     <Box marginBottom={1}>
       <Box marginRight={1}>
-        <Text bold italic>nyaitter-cli</Text>
+        <Text bold italic>
+          nyaitter-cli
+        </Text>
         <Button char="h" onClick={() => navigate("/")} />
       </Box>
 
@@ -32,5 +34,5 @@ export function TopBar() {
       </Box>
       <Button char="n" onClick={() => navigate("/notification")} />
     </Box>
-  )
+  );
 }

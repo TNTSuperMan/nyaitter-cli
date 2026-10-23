@@ -10,9 +10,5 @@ export function MemoryView() {
     return () => clearInterval(int);
   }, []);
 
-  return (
-    <Text>
-      Memory usage: {mem}MB
-    </Text>
-  );
+  return <Text>Memory usage: {mem}MB</Text>;
 }

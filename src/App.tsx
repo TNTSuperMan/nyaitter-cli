@@ -5,7 +5,7 @@ import { TopBar } from "./view/TopBar";
 import { Box, Text } from "ink";
 import { Notification } from "./pages/Notification";
 
-export const NavigatorContext = createContext<(path: string) => void>(() => { });
+export const NavigatorContext = createContext<(path: string) => void>(() => {});
 
 function Page({ path }: { path: string }) {
   if (path === "/") {
@@ -23,7 +23,7 @@ function Page({ path }: { path: string }) {
     if (isNaN(id)) {
       return <Text>invalid user id</Text>;
     }
-    return <Text>User page: #{id.toString().padStart(4,"0")}</Text>;
+    return <Text>User page: #{id.toString().padStart(4, "0")}</Text>;
   }
 
   return <Text>not found this page: {path}</Text>;
@@ -34,9 +34,7 @@ export function App() {
 
   return (
     <NavigatorContext value={navigate}>
-      <Suspense fallback={
-        <Spinner type="dots14" />
-      }>
+      <Suspense fallback={<Spinner type="dots14" />}>
         <Box flexDirection="column">
           <TopBar />
           <Page path={path} />

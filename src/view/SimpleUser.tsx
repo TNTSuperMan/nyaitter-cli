@@ -6,13 +6,13 @@ export function SimpleUserView({ user }: { user: SimpleUser }) {
     <Box>
       <Text underline>{user.name}</Text>
       <Text italic>{user.nyaitter_id}</Text>
-      {
-        user.admin
-          ? <Text color="yellow">✔</Text> :
-          user.verify
-            ? <Text color="blue">✔</Text> :
-            false
-      }
+      {user.admin ? (
+        <Text color="yellow">✔</Text>
+      ) : user.verify ? (
+        <Text color="blue">✔</Text>
+      ) : (
+        false
+      )}
     </Box>
   );
 }

@@ -10,7 +10,7 @@ export function Home() {
   const navigate = useContext(NavigatorContext);
   return (
     <Box flexDirection="column">
-      <Page tab={undefined} offset={0} onLoad={() => { }} pageSize={PAGE_SIZE} />
+      <Page tab={undefined} offset={0} onLoad={() => {}} pageSize={PAGE_SIZE} />
     </Box>
   );
 }

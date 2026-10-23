@@ -58,7 +58,7 @@ export interface User extends SimpleUser {
     emoji: "twemoji" | string;
     home_tabs: ("all" | "following" | "announce" | string)[];
     lock: boolean;
-    ng_words: string[]
+    ng_words: string[];
     post_timestamp_format: "absolute_24" | string;
     reject_unknown_login: boolean;
     show_follow: boolean;
@@ -67,7 +67,7 @@ export interface User extends SimpleUser {
     show_scid: boolean;
     show_star: boolean;
     theme: "light" | string;
-  }
+  };
   block: number[];
   notice: Notice[];
   notification_unread_count: number;
@@ -77,7 +77,7 @@ export interface User extends SimpleUser {
   lock: boolean;
   follow: number[];
   like: number[];
-  star: number[]
+  star: number[];
   pin: string | null;
   created_at: string;
 }

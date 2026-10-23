@@ -8,36 +8,44 @@ import { SimpleUserView } from "../view/SimpleUser";
 function NoticeView({ notice }: { notice: Notice }) {
   switch (notice.type) {
     case "like":
-      return <Box flexDirection="column">
-        <Box>
-          <SimpleUserView user={notice.from} />
-          <Text>{" "}like you post(#{notice.target_post?.id}):</Text>
+      return (
+        <Box flexDirection="column">
+          <Box>
+            <SimpleUserView user={notice.from} />
+            <Text> like you post(#{notice.target_post?.id}):</Text>
+          </Box>
+          <Text>{notice.target_post?.content}</Text>
         </Box>
-        <Text>{notice.target_post?.content}</Text>
-      </Box>;
+      );
     case "follow":
-      return <Box>
-        <SimpleUserView user={notice.from} />
-        <Text>{" "}follow you</Text>
-      </Box>;
-    case "reply":
-      return <Box flexDirection="column">
+      return (
         <Box>
           <SimpleUserView user={notice.from} />
-          <Text>{" "}reply(#{notice.target_post?.id}):</Text>
+          <Text> follow you</Text>
         </Box>
-        <Text>{notice.target_post?.content}</Text>
-      </Box>;
+      );
+    case "reply":
+      return (
+        <Box flexDirection="column">
+          <Box>
+            <SimpleUserView user={notice.from} />
+            <Text> reply(#{notice.target_post?.id}):</Text>
+          </Box>
+          <Text>{notice.target_post?.content}</Text>
+        </Box>
+      );
     case "repost":
-    return <Box flexDirection="column">
-      <Box>
-        <SimpleUserView user={notice.from} />
-        <Text>{" "}repost(#{notice.target_post?.id}):</Text>
-      </Box>
-      <Text>{notice.target_post?.content}</Text>
-    </Box>;
+      return (
+        <Box flexDirection="column">
+          <Box>
+            <SimpleUserView user={notice.from} />
+            <Text> repost(#{notice.target_post?.id}):</Text>
+          </Box>
+          <Text>{notice.target_post?.content}</Text>
+        </Box>
+      );
     default:
-      return <Text>Unimplemented notice type: {notice.type}</Text>
+      return <Text>Unimplemented notice type: {notice.type}</Text>;
   }
 }
 
@@ -60,12 +68,16 @@ export function Notification() {
   return (
     <Box flexDirection="column">
       <Text>Notifications{unreads === 0 ? "" : `(${unreads})`}:</Text>
-      {
-        notices.filter(({ read }) => !read).map(notice => <Box key={notice.id} marginTop={1} flexDirection="column">
-          <Text>#{notice.id} {notice.created_at}</Text>
-          <NoticeView notice={notice} />
-        </Box>)
-      }
+      {notices
+        .filter(({ read }) => !read)
+        .map((notice) => (
+          <Box key={notice.id} marginTop={1} flexDirection="column">
+            <Text>
+              #{notice.id} {notice.created_at}
+            </Text>
+            <NoticeView notice={notice} />
+          </Box>
+        ))}
     </Box>
   );
 }
