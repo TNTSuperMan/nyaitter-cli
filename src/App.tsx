@@ -4,6 +4,7 @@ import { Home } from "./pages/Home";
 import { TopBar } from "./view/TopBar";
 import { Box, Text } from "ink";
 import { Notification } from "./pages/Notification";
+import { PostPage } from "./pages/Post";
 
 export const NavigatorContext = createContext<(path: string) => void>(() => {});
 
@@ -24,6 +25,16 @@ function Page({ path }: { path: string }) {
       return <Text>invalid user id</Text>;
     }
     return <Text>User page: #{id.toString().padStart(4, "0")}</Text>;
+  }
+
+  const post_match = /^\/post#(\d*)$/.exec(path);
+  if (post_match) {
+    const [_, id_str] = post_match;
+    const id = parseInt(id_str ?? "NaN");
+    if (isNaN(id)) {
+      return <Text>invalid post id</Text>;
+    }
+    return <PostPage id={id} />
   }
 
   return <Text>not found this page: {path}</Text>;

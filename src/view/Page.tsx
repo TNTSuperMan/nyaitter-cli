@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { client } from "../client";
 import { Spinner } from "@inkjs/ui";
 import { Box, useInput } from "ink";
 import type { Post } from "../client/types";
 import { PostView } from "./Post";
+import { NavigatorContext } from "../App";
 
 export function Page({
   tab,
@@ -20,6 +21,7 @@ export function Page({
 }) {
   const [posts, setPosts] = useState<Post[]>();
   const [selecting, setSelecting] = useState(0);
+  const navigate = useContext(NavigatorContext);
 
   useInput((input, key) => {
     if (posts !== undefined) {
@@ -40,6 +42,9 @@ export function Page({
         } else {
           setSelecting(selecting + 1);
         }
+      }
+      if (input === " ") {
+        navigate(`/post#${posts[selecting]!.id}`);
       }
     }
   });
