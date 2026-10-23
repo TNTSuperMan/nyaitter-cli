@@ -6,7 +6,7 @@ import { PostView } from "../view/Post";
 import { Box, Text } from "ink";
 
 export function PostPage({ id }: { id: number }) {
-  const [thread, setThread] = useState<{ post: Post, replies: Post[] }>();
+  const [thread, setThread] = useState<{ post: Post; replies: Post[] }>();
 
   useEffect(() => {
     client.posts.getThread(id).then(setThread as any);
@@ -15,14 +15,16 @@ export function PostPage({ id }: { id: number }) {
   if (!thread) {
     return <Spinner type="dots14" label="Loading post" />;
   } else {
-    return <Box flexDirection="column">
-      <PostView post={thread.post} />
-      <Box padding={1}>
-        <Text>Replies:{"\n"}</Text>
-        {
-          thread.replies.map(reply => <PostView post={reply} key={reply.id} />)
-        }
+    return (
+      <Box flexDirection="column">
+        <PostView post={thread.post} />
+        <Box padding={1}>
+          <Text>Replies:{"\n"}</Text>
+          {thread.replies.map((reply) => (
+            <PostView post={reply} key={reply.id} />
+          ))}
+        </Box>
       </Box>
-    </Box>;
+    );
   }
 }

@@ -34,7 +34,7 @@ function Page({ path }: { path: string }) {
     if (isNaN(id)) {
       return <Text>invalid post id</Text>;
     }
-    return <PostPage id={id} />
+    return <PostPage id={id} />;
   }
 
   return <Text>not found this page: {path}</Text>;
