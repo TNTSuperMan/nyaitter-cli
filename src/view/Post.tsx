@@ -1,10 +1,21 @@
-import { Box, Text } from "ink";
+import { Box, Text, useInput } from "ink";
 import type { Post } from "../client/types";
 import { SimpleUserView } from "./SimpleUser";
+import { useState } from "react";
 
-export function PostView({ post }: { post: Post }) {
+export function PostView({ post, active }: { post: Post; active?: boolean }) {
+  const [openMask, setOpenMask] = useState(false);
+
+  useInput((input, key) => {
+    if (active) {
+      if (input === "m") {
+        setOpenMask(!openMask);
+      }
+    }
+  });
+
   return (
-    <Box paddingBottom={1} flexDirection="column">
+    <Box flexDirection="column">
       <Box>
         <SimpleUserView user={post.user} />
         <Text>
@@ -13,8 +24,11 @@ export function PostView({ post }: { post: Post }) {
         </Text>
       </Box>
       <Box>
-        {post.mask ? (
-          <Text backgroundColor="cyan">[MASKED]</Text>
+        {post.mask && !openMask ? (
+          <Box>
+            <Text backgroundColor="grey">[MASKED]</Text>
+            {active && <Text color="grey"> (click 'm' to open)</Text>}
+          </Box>
         ) : (
           <Text color="">{post.view_content}</Text>
         )}
