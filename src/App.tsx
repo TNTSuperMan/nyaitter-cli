@@ -26,7 +26,7 @@ function Page({ path }: { path: string }) {
     return <Text>User page: #{id.toString().padStart(4,"0")}</Text>;
   }
 
-  return <Text>not found this page</Text>;
+  return <Text>not found this page: {path}</Text>;
 }
 
 export function App() {
