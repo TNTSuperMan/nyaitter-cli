@@ -4,18 +4,13 @@ import { useContext } from "react";
 import { NavigatorContext } from "../App";
 import { Page } from "../view/Page";
 
+const PAGE_SIZE = 10;
+
 export function Home() {
   const navigate = useContext(NavigatorContext);
   return (
     <Box flexDirection="column">
-      <Text>Welcome to nyaitter-cli! Select action:</Text>
-      <Select
-        options={[
-          { label: "Timeline", value: "/tl" },
-        ]}
-        onChange={navigate}
-      />
-      <Page tab={undefined} offset={0} onLoad={() => { }} />
+      <Page tab={undefined} offset={0} onLoad={() => { }} pageSize={PAGE_SIZE} />
     </Box>
   );
 }

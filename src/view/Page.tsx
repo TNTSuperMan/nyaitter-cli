@@ -5,13 +5,11 @@ import { Box, Text } from "ink";
 import type { Post } from "../client/types";
 import { PostView } from "./Post";
 
-const PAGE_SIZE = 1;
-
-export function Page({ tab, offset, onLoad }: { tab: undefined | "foryou" | "following", offset: number, onLoad(has_more: boolean): void }) {
+export function Page({ tab, offset, onLoad, pageSize }: { tab: undefined | "foryou" | "following", offset: number, onLoad(has_more: boolean): void, pageSize: number }) {
   const [posts, setPosts] = useState<Post[]>();
 
   useEffect(() => {
-    client.posts.getTimeline({ tab, limit: PAGE_SIZE, offset: offset * PAGE_SIZE }).then(({ posts, has_more }) => {
+    client.posts.getTimeline({ tab, limit: pageSize, offset: offset * pageSize }).then(({ posts, has_more }) => {
       setPosts(posts as any);
       onLoad(has_more ?? true);
     });
