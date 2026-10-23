@@ -1,7 +1,7 @@
 import { Box, Text } from "ink";
-import { useNotificationUnreads } from "../client/hooks/notificationUnreads";
 import { useEffect, useState } from "react";
 import { client } from "../client";
+import { useNotificationUnreads } from "../client/hooks/notificationUnreads";
 import type { Notice } from "../client/types";
 import { SimpleUserView } from "../view/SimpleUser";
 

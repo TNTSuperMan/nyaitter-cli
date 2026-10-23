@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import type { Post } from "../client/types";
-import { client } from "../client";
-import { Spinner } from "@inkjs/ui";
-import { PostView } from "../view/Post";
 import { Box, Text } from "ink";
+import { Spinner } from "@inkjs/ui";
+import { client } from "../client";
+import type { Post } from "../client/types";
+import { PostView } from "../view/Post";
 
 export function PostPage({ id }: { id: number }) {
   const [thread, setThread] = useState<{ post: Post; replies: Post[] }>();

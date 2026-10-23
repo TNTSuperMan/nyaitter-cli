@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { client } from "../client";
-import { Spinner } from "@inkjs/ui";
 import { Box, useInput } from "ink";
+import { Spinner } from "@inkjs/ui";
+import { NavigatorContext } from "../App";
+import { client } from "../client";
 import type { Post } from "../client/types";
 import { PostView } from "./Post";
-import { NavigatorContext } from "../App";
 
 export function Page({
   tab,

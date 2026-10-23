@@ -2,10 +2,10 @@ import { use, useContext } from "react";
 import { Box, Text } from "ink";
 import { NavigatorContext } from "../App";
 import { client } from "../client";
+import { useNotificationUnreads } from "../client/hooks/notificationUnreads";
 import type { User } from "../client/types";
 import { Button } from "../view/Button";
 import { SimpleUserView } from "../view/SimpleUser";
-import { useNotificationUnreads } from "../client/hooks/notificationUnreads";
 
 const me_promise = client.getMe();
 

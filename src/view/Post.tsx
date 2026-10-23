@@ -1,7 +1,7 @@
+import { useState } from "react";
 import { Box, Text, useInput } from "ink";
 import type { Post } from "../client/types";
 import { SimpleUserView } from "./SimpleUser";
-import { useState } from "react";
 
 export function PostView({ post, active }: { post: Post; active?: boolean }) {
   const [openMask, setOpenMask] = useState(false);

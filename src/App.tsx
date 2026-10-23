@@ -1,8 +1,8 @@
 import { createContext, Suspense, useState } from "react";
-import { Spinner } from "@inkjs/ui";
-import { Home } from "./pages/Home";
-import { TopBar } from "./view/TopBar";
 import { Box, Text } from "ink";
+import { Spinner } from "@inkjs/ui";
+import { TopBar } from "./view/TopBar";
+import { Home } from "./pages/Home";
 import { Notification } from "./pages/Notification";
 import { PostPage } from "./pages/Post";
 
