@@ -22,13 +22,17 @@ if (isNaN(ratelimit_secs)) {
   console.error("NYAITTER_RATELIMIT_SECS環境変数の値が不正です");
   process.exit(1);
 }
-
+const [limited_fetch, limiting_store] = createRatelimitedFetch(
+  ratelimit_counts,
+  ratelimit_secs,
+);
 export const client = new NyaitterClient({
   baseUrl,
   token,
-  fetch: createRatelimitedFetch(ratelimit_counts, ratelimit_secs),
+  fetch: limited_fetch,
   WebSocket: require("ws"),
 });
+export { limiting_store };
 
 export const realtime = client.realtime();
 await realtime.connect();

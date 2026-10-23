@@ -1,7 +1,7 @@
-import { use, useContext } from "react";
+import { use, useContext, useSyncExternalStore } from "react";
 import { Box, Text } from "ink";
 import { NavigatorContext } from "../App";
-import { client } from "../client";
+import { client, limiting_store } from "../client";
 import { useNotificationUnreads } from "../client/hooks/notificationUnreads";
 import type { User } from "../client/types";
 import { Button } from "../view/Button";
@@ -10,6 +10,10 @@ import { SimpleUserView } from "../view/SimpleUser";
 const me_promise = client.getMe();
 
 export function TopBar() {
+  const is_limiting = useSyncExternalStore(
+    limiting_store.subscribe,
+    limiting_store.getSnapshot,
+  );
   const navigate = useContext(NavigatorContext);
   const me = use(me_promise).user as User;
   const unreads = useNotificationUnreads(me.notification_unread_count);
@@ -20,6 +24,11 @@ export function TopBar() {
         <Text bold italic>
           nyaitter-cli
         </Text>
+        {is_limiting && (
+          <Box marginX={1}>
+            <Text backgroundColor="red">RATE LIMITING!</Text>
+          </Box>
+        )}
         <Button char="h" onClick={() => navigate("/")} />
       </Box>
 
