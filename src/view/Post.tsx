@@ -1,15 +1,34 @@
 import { useState } from "react";
 import { Box, Text, useInput } from "ink";
+import { client } from "../client";
 import type { Post } from "../client/types";
 import { SimpleUserView } from "./SimpleUser";
 
-export function PostView({ post, active }: { post: Post; active?: boolean }) {
+export function PostView({ post: init_post, active }: { post: Post; active?: boolean }) {
+  const [post, setPost] = useState(init_post);
   const [openMask, setOpenMask] = useState(false);
+  function refresh() {
+    client.posts.get(post.id).then(({ post }) => setPost(post as any));
+  }
 
   useInput((input, key) => {
     if (active) {
-      if (input === "m") {
-        setOpenMask(!openMask);
+      switch (input) {
+        case "m":
+          setOpenMask(!openMask);
+          break;
+        case "g":
+          // todo: reply
+          break;
+        case "j":
+          client.posts.like(post.id).then(refresh);
+          break;
+        case "k":
+          client.posts.star(post.id).then(refresh);
+          break;
+        case "l":
+          client.posts.repost(post.id).then(refresh);
+          break;
       }
     }
   });
@@ -40,6 +59,7 @@ export function PostView({ post, active }: { post: Post; active?: boolean }) {
         <Text color={post.starred_by_me ? "red" : undefined}>★</Text>
         <Text>{" " + post.star_count.toString() + " "}</Text>
         <Text>⥮{" " + post.repost_count.toString()}</Text>
+        {active && <Text color="grey"> ('j':♥  'k':★  'l':⥮ )</Text>}
       </Box>
     </Box>
   );
