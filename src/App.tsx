@@ -1,4 +1,4 @@
-import { createContext, Suspense, useState } from "react";
+import { createContext, Suspense, useMemo, useRef, useState } from "react";
 import { Box, Text } from "ink";
 import { Spinner } from "@inkjs/ui";
 import { TopBar } from "./view/TopBar";
@@ -6,7 +6,13 @@ import { Home } from "./pages/Home";
 import { Notification } from "./pages/Notification";
 import { PostPage } from "./pages/Post";
 
-export const NavigatorContext = createContext<(path: string) => void>(() => {});
+export const NavigatorContext = createContext<{
+  navigate(path: string): void;
+  undo(): void;
+}>({
+  navigate() {},
+  undo() {},
+});
 
 function Page({ path }: { path: string }) {
   if (path === "/") {
@@ -41,10 +47,23 @@ function Page({ path }: { path: string }) {
 }
 
 export function App() {
-  const [path, navigate] = useState<string>("/");
+  const history = useRef<string[]>([]);
+  const [path, setPath] = useState<string>("/");
+  const navigator = useMemo(
+    () => ({
+      navigate(newPath: string) {
+        setPath(newPath);
+        history.current.push(path);
+      },
+      undo() {
+        setPath(history.current.pop() ?? "/");
+      },
+    }),
+    [path],
+  );
 
   return (
-    <NavigatorContext value={navigate}>
+    <NavigatorContext value={navigator}>
       <Suspense fallback={<Spinner type="dots14" />}>
         <Box flexDirection="column">
           <TopBar />

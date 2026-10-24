@@ -1,5 +1,5 @@
 import { use, useContext, useSyncExternalStore } from "react";
-import { Box, Text } from "ink";
+import { Box, Text, useInput } from "ink";
 import { NavigatorContext } from "../App";
 import { client, limiting_store } from "../client";
 import { useNotificationUnreads } from "../client/hooks/notificationUnreads";
@@ -14,9 +14,15 @@ export function TopBar() {
     limiting_store.subscribe,
     limiting_store.getSnapshot,
   );
-  const navigate = useContext(NavigatorContext);
+  const { navigate, undo } = useContext(NavigatorContext);
   const me = use(me_promise).user as User;
   const unreads = useNotificationUnreads(me.notification_unread_count);
+
+  useInput((_input, key) => {
+    if (key.meta && key.leftArrow) {
+      undo();
+    }
+  });
 
   return (
     <Box marginBottom={1}>

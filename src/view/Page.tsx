@@ -21,7 +21,7 @@ export function Page({
 }) {
   const [posts, setPosts] = useState<Post[]>();
   const [selecting, setSelecting] = useState(0);
-  const navigate = useContext(NavigatorContext);
+  const { navigate } = useContext(NavigatorContext);
 
   useInput((input, key) => {
     if (posts !== undefined) {
